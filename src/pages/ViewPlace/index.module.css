@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+
+  padding: 1em;
+}
+
+.commentsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding-left: 1em;
+}
+
+.submitCommentForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25em;
+}
+
+.buttons {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}

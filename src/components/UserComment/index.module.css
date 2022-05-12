@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6em;
+
+  border-radius: 0.25em;
+  background-color: var(--color-tertiary);
+  padding: 0.6em;
+}
+
+.user {
+  width: 100%;
+  text-align: right;
+  color: var(--color-primary);
+}

@@ -1,0 +1,45 @@
+.container {
+  display: flex;
+  background-color: var(--color-secondary);
+  gap: 0.5em;
+
+  border-radius: 0.5em;
+  overflow: hidden;
+}
+
+.container div {
+  flex: 1;
+  object-fit: cover;
+}
+
+/* .container div img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+} */
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8em;
+
+  padding: 0.5em;
+}
+
+.description {
+  flex-grow: 1;
+}
+
+.participation {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-end;
+  padding: 0.25em 0.5em;
+  gap: 0.25em;
+  color: var(--color-primary);
+}
+
+.participationSatus {
+  display: flex;
+  gap: 0.25em;
+}

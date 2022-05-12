@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.6em;
+
+  width: fit-content;
+  margin: auto;
+  padding: 1.5em;
+  font-size: larger;
+
+  color: var(--color-primary);
+  background-color: var(--color-secondary);
+  border-radius: 0.25em;
+}

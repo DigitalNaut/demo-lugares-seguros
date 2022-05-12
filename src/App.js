@@ -1,23 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route } from "react-router-dom";
+import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import Home from "pages/Home";
+import AppBar from "components/AppBar";
+import EditPlace from "pages/EditPlace";
+import useAppBar from "components/AppBar/UseAppBar";
+
+import "./App.css";
+import ViewPlace from "pages/ViewPlace";
 
 function App() {
+  const { title, hasBackButton, configAppBar } = useAppBar();
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <AppBar title={title} hasBackButton={hasBackButton} />
+      <Routes>
+        <Route path="/" element={<Home configAppBar={configAppBar} />} />
+        <Route
+          path="places/new"
+          element={<EditPlace configAppBar={configAppBar} />}
+        />
+        <Route
+          path="places/:id/edit"
+          element={<EditPlace configAppBar={configAppBar} />}
+        />
+        <Route
+          path="places/:id/view"
+          element={<ViewPlace configAppBar={configAppBar} />}
+        />
+        <Route
+          path="*"
+          element={
+            <h1>
+              <FontAwesomeIcon icon={faTriangleExclamation} /> Error 404: No
+              encontrado
+            </h1>
+          }
+        />
+      </Routes>
     </div>
   );
 }

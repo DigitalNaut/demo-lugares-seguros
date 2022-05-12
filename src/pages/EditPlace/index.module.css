@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+
+  padding: 1em;
+}
+
+.container form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25em;
+
+  padding-inline: 0.8em;
+  padding-top: 1em;
+}
+
+.buttons {
+  display: flex;
+  gap: 0.5em;
+  justify-content: flex-end;
+}
+
+.centered {
+  justify-content: center;
+}

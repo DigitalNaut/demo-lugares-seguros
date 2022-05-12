@@ -1,0 +1,66 @@
+{
+  "places": [
+    {
+      "title": "Hackademy",
+      "description": "Conviértete en una desarrolladora basándote en proyectos reales.",
+      "image": "https://images.unsplash.com/photo-1569012871812-f38ee64cd54c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=160&q=80",
+      "likes": 1,
+      "comments": [
+        {
+          "user": "Lorena",
+          "text": "¡Yo estudié ahí!",
+          "id": "1"
+        }
+      ],
+      "id": "1"
+    },
+    {
+      "title": "Karaoke Bar",
+      "description": "Para divertirse en grande toda la noche. Sirven comida y bebidas 2x1 los juevebes.",
+      "image": "https://images.unsplash.com/photo-1620832107928-6d835b70fcfa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=160&q=80",
+      "likes": 1,
+      "comments": [],
+      "id": "2"
+    },
+    {
+      "id": "3",
+      "title": "Grupo Coworking",
+      "description": "Espacio de trabajo céntrico. Es espacioso, con barra de snacks que ofrece café gratis.",
+      "image": "https://images.unsplash.com/photo-1604328703693-18313fe20f3a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=160&q=80",
+      "comments": [
+        {
+          "id": "1",
+          "text": "La barra de snacks tiene de todo. ¡Muy buen lugar!",
+          "user": "Génesis"
+        }
+      ],
+      "likes": 2
+    },
+    {
+      "title": "Servicios Médicos La Paz",
+      "description": "Servicios médicos para la mujer con atención íntegra. Cuenta con servicios de diagnóstico y tratamiento en Neurología, Dermatología, Estética, Farmacia Especializada, y Patología.",
+      "image": "https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjZ8fGRvY3RvcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=520&q=60",
+      "likes": 5,
+      "comments": [],
+      "id": "MC5uoRA"
+    },
+    {
+      "title": "The Cat House",
+      "description": "Test",
+      "image": "https://media.istockphoto.com/photos/european-short-haired-cat-picture-id1072769156?k=20&m=1072769156&s=612x612&w=0&h=k6eFXtE7bpEmR2ns5p3qe_KYh098CVLMz4iKm5OuO6Y=",
+      "id": "2uamp1W",
+      "comments": [
+        {
+          "user": "Anna",
+          "text": "Cute cat!",
+          "id": 1652361102732
+        },
+        {
+          "user": "Rube",
+          "text": "A new comment",
+          "id": 1652361294988
+        }
+      ]
+    }
+  ]
+}
