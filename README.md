@@ -25,6 +25,12 @@
   </a>
 </div>
 
+## Nota
+
+Este repo es mejor visualizado en una pantalla de menor tamaño para simular un dispositivo móvil.
+
+Tamaño recomendado: 450x800 pixeles.
+
 ## Instalación
 
 ```sh

@@ -22,7 +22,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "serve": "npx json-server --watch db.json --port 3001 --delay 1500"
+    "serve": "npx json-server --watch db.json --port 3001 --delay 300"
   },
   "eslintConfig": {
     "extends": [
