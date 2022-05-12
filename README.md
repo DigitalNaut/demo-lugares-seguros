@@ -34,7 +34,7 @@ Tamaño recomendado: 450x800 pixeles.
 ## Instalación
 
 ```sh
-git clone "https://github.com/DigitalNaut/demo-lugares-seguros" && cd react-cheat-sheet && npm i
+git clone "https://github.com/DigitalNaut/demo-lugares-seguros" && cd demo-lugares-seguros && npm i
 ```
 
 ## Correr el proyecto
