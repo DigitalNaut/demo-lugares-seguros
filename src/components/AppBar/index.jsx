@@ -1,6 +1,6 @@
-import { faArrowLeft, faHome } from "@fortawesome/free-solid-svg-icons";
+import { Link, Outlet } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { NavLink, Outlet } from "react-router-dom";
+import { faArrowLeft, faHome } from "@fortawesome/free-solid-svg-icons";
 
 import styles from "./index.module.css";
 
@@ -10,9 +10,9 @@ export default function AppBar({ title, hasBackButton }) {
   return (
     <>
       <nav className={styles.container}>
-        <NavLink to={hasBackButton ? -1 : "/"} className={styles.navLink}>
+        <Link to={hasBackButton ? -1 : "/"} className={styles.link}>
           <FontAwesomeIcon icon={icon} />
-        </NavLink>
+        </Link>
         {title || "Lugares Seguros"}
       </nav>
       <Outlet />

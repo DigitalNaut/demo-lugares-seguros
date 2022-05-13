@@ -3,8 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 
 import PlaceCard from "components/PlaceCard";
 import FAB from "components/FAB";
+import Spinner from "components/Spinner";
 import { ErrorBanner } from "components/Error";
-import { Spinner } from "components/Spinner";
 
 import styles from "./Home.module.css";
 import axios from "axios";

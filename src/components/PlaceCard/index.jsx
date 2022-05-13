@@ -1,9 +1,9 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faComment as faCommentRegular,
   faHeart as faHeartRegular,
 } from "@fortawesome/free-regular-svg-icons";
 import { faIcons, faComment, faHeart } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import styles from "./index.module.css";
 

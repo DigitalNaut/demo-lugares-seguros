@@ -8,8 +8,8 @@ import { faAngleLeft, faEye, faSave } from "@fortawesome/free-solid-svg-icons";
 import Button from "components/Button";
 import ImagePreview from "components/ImagePreview";
 import Input from "components/Input";
+import Spinner from "components/Spinner";
 import { ErrorBanner } from "components/Error";
-import { Spinner } from "components/Spinner";
 
 import styles from "./index.module.css";
 
