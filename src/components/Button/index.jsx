@@ -16,7 +16,7 @@ export default function Button({
 
   return (
     <button
-      className={`${styles.container} ${classes[variant]}`}
+      className={`${styles.container} ${classes[variant]} ${disabled && styles.disabled}`}
       onClick={onClick}
       style={style}
       disabled={disabled}

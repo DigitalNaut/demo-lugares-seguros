@@ -13,6 +13,11 @@
   cursor: pointer;
 }
 
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .filledVariant {
   color: white;
   background-color: var(--color-primary);
