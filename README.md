@@ -1,4 +1,4 @@
-# Demo de Lugares Seguros
+# Proyecto: Lugares Seguros
 
 <div align="center">
   <img src="./readme_icons/react.svg#gh-light-mode-only" title="React" alt="React" />
@@ -37,15 +37,9 @@ Tamaño recomendado: 450x800 pixeles.
 git clone "https://github.com/DigitalNaut/demo-lugares-seguros" && cd demo-lugares-seguros && npm i
 ```
 
-## Correr el proyecto
+## Corre el proyecto
 
-1. Levanta el simulador de servidor en una terminal
-
-```sh
-npm run dev
-```
-
-2. Corre el proyecto en otra terminal paralela
+Levanta el simulador de servidor y el proyecto a la vez con
 
 ```sh
 npm start
