@@ -1,13 +1,14 @@
+import PropTypes from "prop-types";
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import PlaceCard from "components/PlaceCard";
 import FAB from "components/FAB";
 import Spinner from "components/Spinner";
-import { ErrorBanner } from "components/Error";
+import ErrorBanner from "components/Error";
 
-import styles from "./Home.module.css";
-import axios from "axios";
+import styles from "./index.module.css";
 
 export default function Home({ configAppBar }) {
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ export default function Home({ configAppBar }) {
     const controller = new AbortController();
     setLoadingError("");
 
-    (async function () {
+    (async function fetchPlaces() {
       try {
         setIsLoading(true);
         const { status, data } = await axios.get(
@@ -62,3 +63,6 @@ export default function Home({ configAppBar }) {
     </main>
   );
 }
+Home.propTypes = {
+  configAppBar: PropTypes.func.isRequired,
+};

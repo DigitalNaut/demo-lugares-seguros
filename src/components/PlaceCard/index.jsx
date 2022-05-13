@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faComment as faCommentRegular,
@@ -9,12 +10,16 @@ import styles from "./index.module.css";
 
 function ParticipationStatus({ icon, count }) {
   return (
-    <span className={styles.participationSatus}>
+    <span className={styles.participationStatus}>
       {Math.max(count, 0) || 0}
       {icon || <FontAwesomeIcon icon={faIcons} />}
     </span>
   );
 }
+ParticipationStatus.propTypes = {
+  icon: PropTypes.node.isRequired,
+  count: PropTypes.number.isRequired,
+};
 
 export default function PlaceCard({
   title,
@@ -51,3 +56,10 @@ export default function PlaceCard({
     </div>
   );
 }
+PlaceCard.propTypes = {
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  likesCount: PropTypes.number.isRequired,
+  commentsCount: PropTypes.number.isRequired,
+};

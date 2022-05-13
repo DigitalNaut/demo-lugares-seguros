@@ -1,10 +1,13 @@
+import React from "react";
+import PropTypes from "prop-types";
+
 import styles from "./index.module.css";
 
 export default function Button({
   icon,
   children,
   onClick,
-  variant = "filled",
+  variant,
   style,
   disabled,
 }) {
@@ -16,7 +19,10 @@ export default function Button({
 
   return (
     <button
-      className={`${styles.container} ${classes[variant]} ${disabled && styles.disabled}`}
+      type="button"
+      className={`${styles.container} ${classes[variant]} ${
+        disabled && styles.disabled
+      }`}
       onClick={onClick}
       style={style}
       disabled={disabled}
@@ -26,3 +32,16 @@ export default function Button({
     </button>
   );
 }
+Button.propTypes = {
+  icon: PropTypes.element.isRequired,
+  children: PropTypes.element.isRequired,
+  onClick: PropTypes.func.isRequired,
+  variant: PropTypes.string,
+  style: React.CSSProperties,
+  disabled: PropTypes.bool,
+};
+Button.defaultProps = {
+  variant: "filled",
+  disabled: false,
+  style: null,
+};

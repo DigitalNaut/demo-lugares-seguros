@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
@@ -10,3 +11,6 @@ export default function FAB({ onClick }) {
     </button>
   );
 }
+FAB.propTypes = {
+  onClick: PropTypes.func.isRequired,
+};

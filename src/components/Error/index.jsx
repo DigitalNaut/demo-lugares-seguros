@@ -1,5 +1,10 @@
+import PropTypes from "prop-types";
+
 import styles from "./index.module.css";
 
-export function ErrorBanner({ message }) {
+export default function ErrorBanner({ message }) {
   return <p className={styles.error}>{message}</p>;
 }
+ErrorBanner.propTypes = {
+  message: PropTypes.string.isRequired,
+};

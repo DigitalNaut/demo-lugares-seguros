@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
@@ -15,7 +16,7 @@ import UserComment from "components/UserComment";
 import Input from "components/Input";
 import Button from "components/Button";
 import LikeButton from "components/LikeButton";
-import { ErrorBanner } from "components/Error";
+import ErrorBanner from "components/Error";
 
 import styles from "./index.module.css";
 
@@ -42,7 +43,7 @@ export default function ViewPlace({ configAppBar }) {
 
     setLoadingError("");
 
-    (async function () {
+    (async function getPlace() {
       try {
         setIsLoading(true);
         const { status, data } = await axios.get(
@@ -55,7 +56,6 @@ export default function ViewPlace({ configAppBar }) {
 
         if (status === 200) setPlace(data);
       } catch (error) {
-        console.log(error.name);
         if (error.name !== "CanceledError") setLoadingError(error.message);
       }
     })();
@@ -107,10 +107,9 @@ export default function ViewPlace({ configAppBar }) {
   };
 
   const handleDelete = async () => {
-    const controller = new AbortController();
-
     try {
       if (
+        // eslint-disable-next-line no-alert
         !window.confirm(
           "El lugar se borrará\nEl lugar se borrará con todos sus comentarios permanentemente."
         )
@@ -119,10 +118,7 @@ export default function ViewPlace({ configAppBar }) {
 
       setIsLoading(true);
       const { status } = await axios.delete(
-        `http://localhost:3001/places/${id}`,
-        {
-          signal: controller.signal,
-        }
+        `http://localhost:3001/places/${id}`
       );
       setIsLoading(false);
 
@@ -131,8 +127,6 @@ export default function ViewPlace({ configAppBar }) {
       if (error.name !== "CanceledError")
         setLoadingError(`Error al eliminar el lugar: ${error.message}`);
     }
-
-    return () => controller.abort();
   };
 
   const { image, title, description, comments } = place || {};
@@ -174,8 +168,8 @@ export default function ViewPlace({ configAppBar }) {
       <div className={styles.commentsSection}>
         <h3>Comentarios</h3>
         {!comments?.length && <p>No hay comentarios</p>}
-        {comments?.map(({ id, text, user }) => (
-          <UserComment key={id} text={text} user={user} />
+        {comments?.map(({ id: commentId, text, user }) => (
+          <UserComment key={commentId} text={text} user={user} />
         ))}
       </div>
       <Divider />
@@ -218,3 +212,6 @@ export default function ViewPlace({ configAppBar }) {
     </main>
   );
 }
+ViewPlace.propTypes = {
+  configAppBar: PropTypes.func.isRequired,
+};

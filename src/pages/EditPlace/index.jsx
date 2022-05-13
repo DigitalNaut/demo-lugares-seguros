@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -8,7 +9,7 @@ import Button from "components/Button";
 import ImagePreview from "components/ImagePreview";
 import Input from "components/Input";
 import Spinner from "components/Spinner";
-import { ErrorBanner } from "components/Error";
+import ErrorBanner from "components/Error";
 
 import styles from "./index.module.css";
 
@@ -24,7 +25,7 @@ export default function EditPlace({ configAppBar }) {
   });
   const [formError, setFormError] = useState({});
   const [submitError, setSubmitError] = useState("");
-  const [isLoading, setIsLoading] = useState(id ? true : false);
+  const [isLoading, setIsLoading] = useState(!!id);
   const [loadingError, setLoadingError] = useState("");
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
@@ -38,7 +39,7 @@ export default function EditPlace({ configAppBar }) {
     const controller = new AbortController();
     setLoadingError("");
 
-    (async function () {
+    (async function fetchPlace() {
       try {
         setIsLoading(true);
         const { status, data } = await axios.get(
@@ -63,7 +64,8 @@ export default function EditPlace({ configAppBar }) {
     setSubmitError("");
 
     try {
-      let status, data;
+      let status;
+      let data;
 
       setIsLoading(true);
       if (!id) {
@@ -176,3 +178,6 @@ export default function EditPlace({ configAppBar }) {
     </main>
   );
 }
+EditPlace.propTypes = {
+  configAppBar: PropTypes.func.isRequired,
+};

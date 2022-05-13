@@ -12,12 +12,6 @@
   object-fit: cover;
 }
 
-/* .container div img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-} */
-
 .content {
   display: flex;
   flex-direction: column;
@@ -39,7 +33,7 @@
   color: var(--color-primary);
 }
 
-.participationSatus {
+.participationStatus {
   display: flex;
   gap: 0.25em;
 }

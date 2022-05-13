@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useState } from "react";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -22,7 +23,7 @@ export default function LikeButton({ place, setPlace }) {
     return faHeart;
   };
 
-  const handleLike = async (event) => {
+  const handleLike = async () => {
     const controller = new AbortController();
 
     setLikedError("");
@@ -71,3 +72,8 @@ export default function LikeButton({ place, setPlace }) {
     </Button>
   );
 }
+LikeButton.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  place: PropTypes.object.isRequired,
+  setPlace: PropTypes.func.isRequired,
+};

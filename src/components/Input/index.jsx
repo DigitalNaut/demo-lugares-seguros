@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-props-no-spreading */
+import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimesCircle } from "@fortawesome/free-regular-svg-icons";
 
@@ -10,6 +12,9 @@ function ClearButton({ onClick }) {
     </button>
   );
 }
+ClearButton.propTypes = {
+  onClick: PropTypes.func.isRequired,
+};
 
 export default function Input({
   supportText,
@@ -18,12 +23,12 @@ export default function Input({
   setInput,
   setError,
   name,
-  label = "Label",
-  maxLength = 300,
-  multiline = false,
-  fontSize = "medium",
-  placeholder = "",
-  required = false,
+  label,
+  maxLength,
+  multiline,
+  fontSize,
+  placeholder,
+  required,
 }) {
   const isValidInput = (url) => (!pattern ? true : pattern.test(url));
 
@@ -65,9 +70,10 @@ export default function Input({
     }));
   };
 
-  const style = { fontSize: fontSize };
+  const style = { fontSize };
 
   const elementProps = {
+    id: "input",
     value,
     onChange,
     maxLength,
@@ -78,8 +84,8 @@ export default function Input({
   };
 
   return (
-    <div className={styles.container}>
-      <label>{label}</label>
+    <label htmlFor="input" className={styles.container}>
+      {label}
       {value && <ClearButton onClick={clear} />}
       {multiline ? <textarea {...elementProps} /> : <input {...elementProps} />}
       <div className={styles.helperText}>
@@ -88,6 +94,30 @@ export default function Input({
           {value?.length || 0}/{maxLength}
         </span>
       </div>
-    </div>
+    </label>
   );
 }
+Input.propTypes = {
+  supportText: PropTypes.string.isRequired,
+  pattern: PropTypes.instanceOf(RegExp),
+  value: PropTypes.string,
+  setInput: PropTypes.func.isRequired,
+  setError: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string,
+  maxLength: PropTypes.number,
+  multiline: PropTypes.bool,
+  fontSize: PropTypes.string,
+  placeholder: PropTypes.string,
+  required: PropTypes.bool,
+};
+Input.defaultProps = {
+  pattern: null,
+  value: "",
+  label: "Label",
+  maxLength: 300,
+  multiline: false,
+  fontSize: "medium",
+  placeholder: "",
+  required: false,
+};

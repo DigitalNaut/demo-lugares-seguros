@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import styles from "./index.module.css";
 
 export default function UserComment({ text, user }) {
@@ -8,3 +9,7 @@ export default function UserComment({ text, user }) {
     </div>
   );
 }
+UserComment.propTypes = {
+  text: PropTypes.string.isRequired,
+  user: PropTypes.string.isRequired,
+};
