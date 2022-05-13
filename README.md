@@ -39,7 +39,7 @@ git clone "https://github.com/DigitalNaut/demo-lugares-seguros" && cd demo-lugar
 
 ## Corre el proyecto
 
-Levanta el simulador de servidor y el proyecto a la vez con
+Levanta el simulador de servidor y el proyecto a la vez con el comando:
 
 ```sh
 npm start
