@@ -44,7 +44,7 @@ export default function Home({ configAppBar }) {
   }, []);
 
   return (
-    <main className={styles.container}>
+    <main className="page">
       <FAB onClick={() => navigate("/places/new")} />
       {loadingError && <ErrorBanner message={loadingError} />}
       {isLoading && <Spinner />}

@@ -139,14 +139,14 @@ export default function ViewPlace({ configAppBar }) {
 
   if (isLoading)
     return (
-      <main className={styles.container}>
+      <main className="page">
         {loadingError && <ErrorBanner message={loadingError} />}
         <Spinner />
       </main>
     );
 
   return (
-    <main className={styles.container}>
+    <main className="page">
       <h1>Ver un lugar seguro</h1>
       <ImagePreview url={image || ""} />
       <div className={styles.buttons}>

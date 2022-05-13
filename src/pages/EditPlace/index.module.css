@@ -1,12 +1,4 @@
-.container {
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-
-  padding: 1em;
-}
-
-.container form {
+.form {
   display: flex;
   flex-direction: column;
   gap: 0.25em;
@@ -21,6 +13,6 @@
   justify-content: flex-end;
 }
 
-.centered {
-  justify-content: center;
+.flexMiddle {
+  align-items: center;
 }

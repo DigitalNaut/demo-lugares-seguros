@@ -92,9 +92,9 @@ export default function EditPlace({ configAppBar }) {
 
   if (submitSuccess) {
     return (
-      <main className={styles.container}>
+      <main className={`page ${styles.flexMiddle}`}>
         <h1>¡Lugar {id ? "actualizado" : "creado"}!</h1>
-        <div className={`${styles.buttons} ${styles.centered}`}>
+        <div className={styles.buttons}>
           <Button
             icon={<FontAwesomeIcon icon={faAngleLeft} />}
             variant="text"
@@ -121,19 +121,19 @@ export default function EditPlace({ configAppBar }) {
 
   if (isLoading)
     return (
-      <main className={styles.container}>
+      <main className="page">
         {loadingError && <ErrorBanner message={loadingError} />}
         <Spinner />
       </main>
     );
 
   return (
-    <main className={styles.container}>
+    <main className="page">
       <h1>{id ? "Editar" : "Crear"} un lugar seguro</h1>
       <ImagePreview
         url={validImageUrlPattern.test(formInput.image) ? formInput.image : ""}
       />
-      <form onSubmit={onSubmit}>
+      <form className={styles.form} onSubmit={onSubmit}>
         {submitError && <ErrorBanner message={submitError} />}
         <Input
           label="Nombre"

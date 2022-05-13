@@ -16,3 +16,11 @@ h3,
 h4 {
   font-weight: lighter;
 }
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+
+  padding: 1em;
+}
