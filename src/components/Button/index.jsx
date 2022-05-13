@@ -5,6 +5,8 @@ export default function Button({
   children,
   onClick,
   variant = "filled",
+  style,
+  disabled,
 }) {
   const classes = {
     filled: styles.filledVariant,
@@ -16,6 +18,8 @@ export default function Button({
     <button
       className={`${styles.container} ${classes[variant]}`}
       onClick={onClick}
+      style={style}
+      disabled={disabled}
     >
       {icon}
       {children}

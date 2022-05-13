@@ -1,24 +1,23 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-
-import ImagePreview from "components/ImagePreview";
-import Divider from "components/Divider";
-import UserComment from "components/UserComment";
-
-import styles from "./index.module.css";
-import Input from "components/Input";
-import Button from "components/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEdit,
-  faHeart as faHeartSolid,
   faPaperPlane,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
+
+import Spinner from "components/Spinner";
+import ImagePreview from "components/ImagePreview";
+import Divider from "components/Divider";
+import UserComment from "components/UserComment";
+import Input from "components/Input";
+import Button from "components/Button";
+import LikeButton from "components/LikeButton";
 import { ErrorBanner } from "components/Error";
-import { faHeart } from "@fortawesome/free-regular-svg-icons";
-import { Spinner } from "components/Spinner";
+
+import styles from "./index.module.css";
 
 export default function ViewPlace({ configAppBar }) {
   const { id } = useParams();
@@ -28,8 +27,6 @@ export default function ViewPlace({ configAppBar }) {
     user: "",
     text: "",
   });
-  const [liked, setLiked] = useState(false);
-  const [likedError, setLikedError] = useState("");
   const [formError, setFormError] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
@@ -109,35 +106,6 @@ export default function ViewPlace({ configAppBar }) {
     return () => controller.abort();
   };
 
-  const handleLike = async () => {
-    const controller = new AbortController();
-
-    const likedPlace = {
-      ...place,
-      likes: liked ? place.likes - 1 : place.likes + 1,
-    };
-
-    try {
-      const { status } = await axios.patch(
-        `http://localhost:3001/places/${id}`,
-        likedPlace,
-        {
-          signal: controller.signal,
-        }
-      );
-
-      if (status === 200) {
-        setPlace(likedPlace);
-        setLiked(!liked);
-      }
-    } catch (error) {
-      if (error.name !== "CanceledError")
-        setLikedError(`Error al marcar como favorito: ${error.message}`);
-    }
-
-    return () => controller.abort();
-  };
-
   const handleDelete = async () => {
     const controller = new AbortController();
 
@@ -198,13 +166,7 @@ export default function ViewPlace({ configAppBar }) {
         >
           Editar
         </Button>
-        <Button
-          icon={<FontAwesomeIcon icon={liked ? faHeartSolid : faHeart} />}
-          variant="text"
-          onClick={likedError || handleLike}
-        >
-          Like
-        </Button>
+        <LikeButton place={place} setPlace={setPlace} />
       </div>
       <h2>{title}</h2>
       <p>{description}</p>
