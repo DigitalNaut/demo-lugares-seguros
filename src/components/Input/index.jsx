@@ -98,7 +98,7 @@ export default function Input({
   );
 }
 Input.propTypes = {
-  supportText: PropTypes.string.isRequired,
+  supportText: PropTypes.string,
   pattern: PropTypes.instanceOf(RegExp),
   value: PropTypes.string,
   setInput: PropTypes.func.isRequired,
@@ -112,6 +112,7 @@ Input.propTypes = {
   required: PropTypes.bool,
 };
 Input.defaultProps = {
+  supportText: "",
   pattern: null,
   value: "",
   label: "Label",

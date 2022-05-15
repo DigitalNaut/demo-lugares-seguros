@@ -60,6 +60,10 @@ PlaceCard.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
-  likesCount: PropTypes.number.isRequired,
-  commentsCount: PropTypes.number.isRequired,
+  likesCount: PropTypes.number,
+  commentsCount: PropTypes.number,
 };
+PlaceCard.defaultProps = {
+  likesCount: 0,
+  commentsCount: 0,
+}
