@@ -2,3 +2,7 @@
   text-decoration: none;
   color: inherit;
 }
+
+.bottomMargin {
+  margin-bottom: 3.5em;
+}

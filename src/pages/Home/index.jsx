@@ -38,7 +38,7 @@ export default function Home({ configAppBar }) {
   }, []);
 
   return (
-    <main className="page">
+    <main className={`page ${styles.bottomMargin}`}>
       {loadingError && <ErrorBanner message={loadingError} />}
       {isLoading && <Spinner />}
 

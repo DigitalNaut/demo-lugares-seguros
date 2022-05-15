@@ -9,7 +9,7 @@ export default function WithFAB({ onClick }) {
   return (
     <>
       <button type="button" className={styles.container} onClick={onClick}>
-        <FontAwesomeIcon icon={faPlus} />
+        <FontAwesomeIcon icon={faPlus} /> Crear lugar
       </button>
       <Outlet />
     </>
