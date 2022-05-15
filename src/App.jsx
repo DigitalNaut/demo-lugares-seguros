@@ -1,23 +1,30 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import Home from "pages/Home";
-import AppBar from "components/AppBar";
-import EditPlace from "pages/EditPlace";
 import useAppBar from "components/AppBar/UseAppBar";
-
-import "./App.css";
+import AppBar from "components/AppBar";
+import WithFAB from "components/FAB";
+import Home from "pages/Home";
+import EditPlace from "pages/EditPlace";
 import ViewPlace from "pages/ViewPlace";
 
+import "./App.css";
+
 function App() {
+  const navigate = useNavigate();
   const { title, hasBackButton, configAppBar } = useAppBar();
 
   return (
     <div className="App">
       <AppBar title={title} hasBackButton={hasBackButton} />
       <Routes>
-        <Route path="/" element={<Home configAppBar={configAppBar} />} />
+        <Route
+          path="/"
+          element={<WithFAB onClick={() => navigate("/places/new")} />}
+        >
+          <Route path="" element={<Home configAppBar={configAppBar} />} />
+        </Route>
         <Route
           path="places/new"
           element={<EditPlace configAppBar={configAppBar} />}

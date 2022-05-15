@@ -1,17 +1,15 @@
 import PropTypes from "prop-types";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import PlaceCard from "components/PlaceCard";
-import FAB from "components/FAB";
 import Spinner from "components/Spinner";
 import ErrorBanner from "components/Error";
 
 import styles from "./index.module.css";
 
 export default function Home({ configAppBar }) {
-  const navigate = useNavigate();
   const [places, setPlaces] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [loadingError, setLoadingError] = useState("");
@@ -46,9 +44,9 @@ export default function Home({ configAppBar }) {
 
   return (
     <main className="page">
-      <FAB onClick={() => navigate("/places/new")} />
       {loadingError && <ErrorBanner message={loadingError} />}
       {isLoading && <Spinner />}
+
       {places.map(({ id, title, description, image, comments, likes }) => (
         <Link key={id} to={`/places/${id}/view`} className={styles.link}>
           <PlaceCard
