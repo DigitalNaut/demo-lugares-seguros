@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
-import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHeart as faHeartSolid,
@@ -9,6 +8,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 
+import { patchPlace } from "api/places";
 import Button from "components/Button";
 
 export default function LikeButton({ place, setPlace }) {
@@ -35,13 +35,7 @@ export default function LikeButton({ place, setPlace }) {
 
     try {
       setIsTogglingLike(true);
-      const { status } = await axios.patch(
-        `http://localhost:3001/places/${place.id}`,
-        likedPlace,
-        {
-          signal: controller.signal,
-        }
-      );
+      const { status } = await patchPlace(place.id, likedPlace, controller.signal);
       setIsTogglingLike(false);
 
       if (status === 200) {

@@ -1,11 +1,11 @@
 import PropTypes from "prop-types";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import PlaceCard from "components/PlaceCard";
 import Spinner from "components/Spinner";
 import ErrorBanner from "components/Error";
+import { getPlaces } from "api/places";
 
 import styles from "./index.module.css";
 
@@ -25,12 +25,7 @@ export default function Home({ configAppBar }) {
     (async function fetchPlaces() {
       try {
         setIsLoading(true);
-        const { status, data } = await axios.get(
-          "http://localhost:3001/places",
-          {
-            signal: controller.signal,
-          }
-        );
+        const { status, data } = await getPlaces(controller.signal);
         setIsLoading(false);
 
         if (status === 200) setPlaces(data);

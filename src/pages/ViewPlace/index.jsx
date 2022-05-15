@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEdit,
@@ -17,6 +16,7 @@ import Input from "components/Input";
 import Button from "components/Button";
 import LikeButton from "components/LikeButton";
 import ErrorBanner from "components/Error";
+import { deletePlace, getPlace, patchPlace } from "api/places";
 
 import styles from "./index.module.css";
 
@@ -43,15 +43,10 @@ export default function ViewPlace({ configAppBar }) {
 
     setLoadingError("");
 
-    (async function getPlace() {
+    (async function fetchPlace() {
       try {
         setIsLoading(true);
-        const { status, data } = await axios.get(
-          `http://localhost:3001/places/${id}`,
-          {
-            signal: controller.signal,
-          }
-        );
+        const { status, data } = await getPlace(id, controller.signal);
         setIsLoading(false);
 
         if (status === 200) setPlace(data);
@@ -85,13 +80,7 @@ export default function ViewPlace({ configAppBar }) {
       };
 
       setIsSubmitting(true);
-      const { status } = await axios.patch(
-        `http://localhost:3001/places/${id}`,
-        updatedPlace,
-        {
-          signal: controller.signal,
-        }
-      );
+      const { status } = await patchPlace(id, updatedPlace, controller.signal);
       setIsSubmitting(false);
 
       if (status === 200) {
@@ -117,9 +106,7 @@ export default function ViewPlace({ configAppBar }) {
         return;
 
       setIsLoading(true);
-      const { status } = await axios.delete(
-        `http://localhost:3001/places/${id}`
-      );
+      const { status } = await deletePlace(id);
       setIsLoading(false);
 
       if (status === 200) navigate("/");

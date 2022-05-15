@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faEye, faSave } from "@fortawesome/free-solid-svg-icons";
 
@@ -10,6 +9,7 @@ import ImagePreview from "components/ImagePreview";
 import Input from "components/Input";
 import Spinner from "components/Spinner";
 import ErrorBanner from "components/Error";
+import { postPlace, getPlace, putPlace } from "api/places";
 
 import styles from "./index.module.css";
 
@@ -42,12 +42,7 @@ export default function EditPlace({ configAppBar }) {
     (async function fetchPlace() {
       try {
         setIsLoading(true);
-        const { status, data } = await axios.get(
-          `http://localhost:3001/places/${id}`,
-          {
-            signal: controller.signal,
-          }
-        );
+        const { status, data } = await getPlace(id, controller.signal);
         setIsLoading(false);
 
         if (status === 200) setFormInput({ ...data });
@@ -69,15 +64,9 @@ export default function EditPlace({ configAppBar }) {
 
       setIsLoading(true);
       if (!id) {
-        ({ status, data } = await axios.post(
-          "http://localhost:3001/places",
-          formInput
-        ));
+        ({ status, data } = await postPlace(formInput));
       } else {
-        ({ status, data } = await axios.put(
-          `http://localhost:3001/places/${id}`,
-          formInput
-        ));
+        ({ status, data } = await putPlace(id, formInput));
       }
       setIsLoading(false);
 
