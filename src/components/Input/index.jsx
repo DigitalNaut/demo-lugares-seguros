@@ -33,12 +33,14 @@ export default function Input({
   const isValidInput = (url) => (!pattern ? true : pattern.test(url));
 
   const onChange = (event) => {
+    const { currentTarget } = event; // Persistir en llamada asíncrona setInput
+
     setInput((prevInput) => ({
       ...prevInput,
-      [name]: event.target.value,
+      [name]: currentTarget.value,
     }));
     setError((prevError) => {
-      const validInput = isValidInput(event.target.value);
+      const validInput = isValidInput(currentTarget.value);
       const hasError = prevError[name];
 
       // Quitando error si el input es válido

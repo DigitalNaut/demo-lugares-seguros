@@ -11,7 +11,7 @@ export default function AppBar({ title, hasBackButton }) {
   return (
     <>
       <nav className={styles.container}>
-        <Link to={hasBackButton ? -1 : "/"} className={styles.link}>
+        <Link to="/" className={styles.link}>
           <FontAwesomeIcon icon={icon} />
         </Link>
         {title || "Lugares Seguros"}
