@@ -75,7 +75,7 @@ export default function Input({
   const style = { fontSize };
 
   const elementProps = {
-    id: "input",
+    id: `input-${name}`,
     value,
     onChange,
     maxLength,
@@ -86,8 +86,8 @@ export default function Input({
   };
 
   return (
-    <label htmlFor="input" className={styles.container}>
-      {label}
+    <div className={styles.container}>
+      <label htmlFor={elementProps.id}>{label}</label>
       {value && <ClearButton onClick={clear} />}
       {multiline ? <textarea {...elementProps} /> : <input {...elementProps} />}
       <div className={styles.helperText}>
@@ -96,7 +96,7 @@ export default function Input({
           {value?.length || 0}/{maxLength}
         </span>
       </div>
-    </label>
+    </div>
   );
 }
 Input.propTypes = {
