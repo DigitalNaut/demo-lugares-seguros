@@ -17,13 +17,13 @@ ClearButton.propTypes = {
 };
 
 export default function Input({
-  supportText,
-  pattern,
   value,
-  setInput,
-  setError,
   name,
   label,
+  supportingText,
+  pattern,
+  setInput,
+  setError,
   maxLength,
   multiline,
   fontSize,
@@ -91,7 +91,7 @@ export default function Input({
       {value && <ClearButton onClick={clear} />}
       {multiline ? <textarea {...elementProps} /> : <input {...elementProps} />}
       <div className={styles.helperText}>
-        <span>{supportText}</span>
+        <span>{supportingText}</span>
         <span>
           {value?.length || 0}/{maxLength}
         </span>
@@ -100,27 +100,27 @@ export default function Input({
   );
 }
 Input.propTypes = {
-  supportText: PropTypes.string,
-  pattern: PropTypes.instanceOf(RegExp),
-  value: PropTypes.string,
-  setInput: PropTypes.func.isRequired,
-  setError: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
   label: PropTypes.string,
+  value: PropTypes.string,
+  placeholder: PropTypes.string,
+  supportingText: PropTypes.string,
+  pattern: PropTypes.instanceOf(RegExp),
+  setInput: PropTypes.func.isRequired,
+  setError: PropTypes.func.isRequired,
   maxLength: PropTypes.number,
   multiline: PropTypes.bool,
   fontSize: PropTypes.string,
-  placeholder: PropTypes.string,
   required: PropTypes.bool,
 };
 Input.defaultProps = {
-  supportText: "",
-  pattern: null,
   value: "",
   label: "Label",
+  placeholder: "",
+  supportingText: "",
+  pattern: null,
   maxLength: 300,
   multiline: false,
   fontSize: "medium",
-  placeholder: "",
   required: false,
 };
