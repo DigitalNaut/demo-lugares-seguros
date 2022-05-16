@@ -2,11 +2,7 @@ import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faEdit,
-  faPaperPlane,
-  faTrash,
-} from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
 import Spinner from "components/Spinner";
 import ImagePreview from "components/ImagePreview";
@@ -16,7 +12,8 @@ import Input from "components/Input";
 import Button from "components/Button";
 import LikeButton from "components/LikeButton";
 import ErrorBanner from "components/Error";
-import { deletePlace, getPlace, patchPlace } from "api/places";
+import DeleteButton from "components/DeleteButton";
+import { getPlace, patchPlace } from "api/places";
 
 import styles from "./index.module.css";
 
@@ -95,27 +92,6 @@ export default function ViewPlace({ configAppBar }) {
     return () => controller.abort();
   };
 
-  const handleDelete = async () => {
-    try {
-      if (
-        // eslint-disable-next-line no-alert
-        !window.confirm(
-          "El lugar se borrará\nEl lugar se borrará con todos sus comentarios permanentemente."
-        )
-      )
-        return;
-
-      setIsLoading(true);
-      const { status } = await deletePlace(id);
-      setIsLoading(false);
-
-      if (status === 200) navigate("/");
-    } catch (error) {
-      if (error.name !== "CanceledError")
-        setLoadingError(`Error al eliminar el lugar: ${error.message}`);
-    }
-  };
-
   const { image, title, description, comments } = place || {};
 
   if (isLoading)
@@ -131,13 +107,11 @@ export default function ViewPlace({ configAppBar }) {
       <h1>Ver un lugar seguro</h1>
       <ImagePreview url={image || ""} />
       <div className={styles.buttons}>
-        <Button
-          icon={<FontAwesomeIcon icon={faTrash} />}
-          variant="text"
-          onClick={handleDelete}
-        >
-          Eliminar
-        </Button>
+        <DeleteButton
+          placeId={id}
+          setLoading={setIsLoading}
+          setLoadingError={setLoadingError}
+        />
         <Button
           icon={<FontAwesomeIcon icon={faEdit} />}
           variant="text"

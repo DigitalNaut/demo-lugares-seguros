@@ -9,6 +9,7 @@ import ImagePreview from "components/ImagePreview";
 import Input from "components/Input";
 import Spinner from "components/Spinner";
 import ErrorBanner from "components/Error";
+import DeleteButton from "components/DeleteButton";
 import { postPlace, getPlace, putPlace } from "api/places";
 
 import styles from "./index.module.css";
@@ -123,6 +124,22 @@ export default function EditPlace({ configAppBar }) {
       <ImagePreview
         url={validImageUrlPattern.test(formInput.image) ? formInput.image : ""}
       />
+      <div className={styles.buttons}>
+        <DeleteButton
+          placeId={id}
+          setLoading={setIsLoading}
+          setLoadingError={setLoadingError}
+        />
+        <Button
+          icon={<FontAwesomeIcon icon={faEye} />}
+          variant="text"
+          onClick={() => {
+            navigate(`/places/${id}/view`);
+          }}
+        >
+          Ver lugar
+        </Button>
+      </div>
       <form className={styles.form} onSubmit={onSubmit}>
         {submitError && <ErrorBanner message={submitError} />}
         <Input
