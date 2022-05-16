@@ -30,11 +30,11 @@ function App() {
           element={<EditPlace configAppBar={configAppBar} />}
         />
         <Route
-          path="places/:id/edit"
+          path="places/:placeId/edit"
           element={<EditPlace configAppBar={configAppBar} />}
         />
         <Route
-          path="places/:id/view"
+          path="places/:placeId/view"
           element={<ViewPlace configAppBar={configAppBar} />}
         />
         <Route

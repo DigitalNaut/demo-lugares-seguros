@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
@@ -13,84 +12,29 @@ import Button from "components/Button";
 import LikeButton from "components/LikeButton";
 import ErrorBanner from "components/Error";
 import DeleteButton from "components/DeleteButton";
-import { getPlace, patchPlace } from "api/places";
 
+import useViewPlace from "./ViewPlaceHook";
 import styles from "./index.module.css";
 
 export default function ViewPlace({ configAppBar }) {
-  const { id } = useParams();
+  const { placeId } = useParams();
   const navigate = useNavigate();
-  const [place, setPlace] = useState(null);
-  const [formInput, setFormInput] = useState({
-    user: "",
-    text: "",
-  });
-  const [formError, setFormError] = useState({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitError, setSubmitError] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
-  const [loadingError, setLoadingError] = useState("");
 
-  useEffect(() => {
-    configAppBar("Ver un lugar", true);
-  }, [configAppBar]);
-
-  useEffect(() => {
-    const controller = new AbortController();
-
-    setLoadingError("");
-
-    (async function fetchPlace() {
-      try {
-        setIsLoading(true);
-        const { status, data } = await getPlace(id, controller.signal);
-        setIsLoading(false);
-
-        if (status === 200) setPlace(data);
-      } catch (error) {
-        if (error.name !== "CanceledError") setLoadingError(error.message);
-      }
-    })();
-
-    return () => controller.abort();
-  }, [id]);
-
-  const clearForm = () => {
-    setFormInput({
-      user: "",
-      text: "",
-    });
-    setFormError({});
-  };
-
-  const onSubmit = async (event) => {
-    event.preventDefault();
-
-    setSubmitError("");
-
-    const controller = new AbortController();
-
-    try {
-      const updatedPlace = {
-        ...place,
-        comments: [...(place.comments || []), { ...formInput, id: Date.now() }],
-      };
-
-      setIsSubmitting(true);
-      const { status } = await patchPlace(id, updatedPlace, controller.signal);
-      setIsSubmitting(false);
-
-      if (status === 200) {
-        setPlace(updatedPlace);
-        clearForm();
-      }
-    } catch (error) {
-      if (error.name !== "CanceledError")
-        setSubmitError(`Error al enviar el comentario: ${error.message}`);
-    }
-
-    return () => controller.abort();
-  };
+  const {
+    place,
+    setPlace,
+    formInput,
+    setFormInput,
+    formError,
+    setFormError,
+    isLoading,
+    setIsLoading,
+    loadingError,
+    setLoadingError,
+    isSubmitting,
+    onSubmit,
+    submitError,
+  } = useViewPlace(placeId, configAppBar);
 
   const { image, title, description, comments } = place || {};
 
@@ -108,7 +52,7 @@ export default function ViewPlace({ configAppBar }) {
       <ImagePreview url={image || ""} />
       <div className={styles.buttons}>
         <DeleteButton
-          placeId={id}
+          placeId={placeId}
           setLoading={setIsLoading}
           setLoadingError={setLoadingError}
         />
@@ -116,7 +60,7 @@ export default function ViewPlace({ configAppBar }) {
           icon={<FontAwesomeIcon icon={faEdit} />}
           variant="text"
           onClick={() => {
-            navigate(`/places/${id}/edit`);
+            navigate(`/places/${placeId}/edit`);
           }}
         >
           Editar

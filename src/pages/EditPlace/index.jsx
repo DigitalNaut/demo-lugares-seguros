@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
-import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faEye, faSave } from "@fortawesome/free-solid-svg-icons";
 
@@ -10,81 +9,34 @@ import Input from "components/Input";
 import Spinner from "components/Spinner";
 import ErrorBanner from "components/Error";
 import DeleteButton from "components/DeleteButton";
-import { postPlace, getPlace, putPlace } from "api/places";
 
+import useEditPlace from "./EditPlaceHook";
 import styles from "./index.module.css";
 
 const validImageUrlPattern = /^https?:\/\/.+$/;
-
 export default function EditPlace({ configAppBar }) {
-  const { id } = useParams();
+  const { placeId } = useParams();
+
   const navigate = useNavigate();
-  const [formInput, setFormInput] = useState({
-    title: "",
-    description: "",
-    image: "",
-  });
-  const [formError, setFormError] = useState({});
-  const [submitError, setSubmitError] = useState("");
-  const [isLoading, setIsLoading] = useState(!!id);
-  const [loadingError, setLoadingError] = useState("");
-  const [submitSuccess, setSubmitSuccess] = useState(false);
-
-  useEffect(() => {
-    configAppBar(`${id ? "Editar" : "Crear"} un lugar`, true);
-  }, [configAppBar, id]);
-
-  useEffect(() => {
-    if (!id) return;
-
-    const controller = new AbortController();
-    setLoadingError("");
-
-    (async function fetchPlace() {
-      try {
-        setIsLoading(true);
-        const { status, data } = await getPlace(id, controller.signal);
-        setIsLoading(false);
-
-        if (status === 200) setFormInput({ ...data });
-      } catch (error) {
-        if (error.name !== "CanceledError")
-          setLoadingError(`Error al obtener el lugar: ${error.message}`);
-      }
-    })();
-  }, [id]);
-
-  const onSubmit = async (event) => {
-    event.preventDefault();
-
-    setSubmitError("");
-
-    try {
-      let status;
-      let data;
-
-      setIsLoading(true);
-      if (!id) {
-        ({ status, data } = await postPlace(formInput));
-      } else {
-        ({ status, data } = await putPlace(id, formInput));
-      }
-      setIsLoading(false);
-
-      if (status >= 200 && status < 300) {
-        setFormInput({ ...formInput, id: data.id });
-        setFormError({});
-        setSubmitSuccess(true);
-      }
-    } catch (error) {
-      if (error.name !== "CanceledError") setSubmitError(error.message);
-    }
-  };
+  const {
+    isLoading,
+    setIsLoading,
+    formInput,
+    setFormInput,
+    submitSuccess,
+    setSubmitSuccess,
+    formError,
+    setFormError,
+    loadingError,
+    setLoadingError,
+    onSubmit,
+    submitError,
+  } = useEditPlace(placeId, configAppBar);
 
   if (submitSuccess) {
     return (
       <main className={`page ${styles.flexMiddle}`}>
-        <h1>¡Lugar {id ? "actualizado" : "creado"}!</h1>
+        <h1>¡Lugar {placeId ? "actualizado" : "creado"}!</h1>
         <div className={styles.buttons}>
           <Button
             icon={<FontAwesomeIcon icon={faAngleLeft} />}
@@ -120,26 +72,28 @@ export default function EditPlace({ configAppBar }) {
 
   return (
     <main className="page">
-      <h1>{id ? "Editar" : "Crear"} un lugar seguro</h1>
+      <h1>{placeId ? "Editar" : "Crear"} un lugar seguro</h1>
       <ImagePreview
         url={validImageUrlPattern.test(formInput.image) ? formInput.image : ""}
       />
-      <div className={styles.buttons}>
-        <DeleteButton
-          placeId={id}
-          setLoading={setIsLoading}
-          setLoadingError={setLoadingError}
-        />
-        <Button
-          icon={<FontAwesomeIcon icon={faEye} />}
-          variant="text"
-          onClick={() => {
-            navigate(`/places/${id}/view`);
-          }}
-        >
-          Ver lugar
-        </Button>
-      </div>
+      {placeId && (
+        <div className={styles.buttons}>
+          <DeleteButton
+            placeId={placeId}
+            setLoading={setIsLoading}
+            setLoadingError={setLoadingError}
+          />
+          <Button
+            icon={<FontAwesomeIcon icon={faEye} />}
+            variant="text"
+            onClick={() => {
+              navigate(`/places/${placeId}/view`);
+            }}
+          >
+            Ver lugar
+          </Button>
+        </div>
+      )}
       <form className={styles.form} onSubmit={onSubmit}>
         {submitError && <ErrorBanner message={submitError} />}
         <Input
@@ -177,7 +131,7 @@ export default function EditPlace({ configAppBar }) {
         />
         <div className={styles.buttons}>
           <Button type="submit" icon={<FontAwesomeIcon icon={faSave} />}>
-            {id ? "Actualizar" : "Crear"}
+            {placeId ? "Actualizar" : "Crear"}
           </Button>
         </div>
       </form>
